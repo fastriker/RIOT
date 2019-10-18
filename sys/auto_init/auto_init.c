@@ -52,6 +52,10 @@
 #include "net/gnrc/udp.h"
 #endif
 
+#ifdef MODULE_GNRC_GOSSIPING
+#include "net/gnrc/gossiping.h"
+#endif
+
 #ifdef MODULE_GNRC_TCP
 #include "net/gnrc/tcp.h"
 #endif
@@ -145,6 +149,10 @@ void auto_init(void)
 #ifdef MODULE_GNRC_UDP
     DEBUG("Auto init UDP module.\n");
     gnrc_udp_init();
+#endif
+#ifdef MODULE_GNRC_GOSSIPING
+    DEBUG("Auto init gossiping module.\n");
+    gnrc_gossiping_init();
 #endif
 #ifdef MODULE_GNRC_TCP
     DEBUG("Auto init TCP module\n");
