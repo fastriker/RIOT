@@ -21,9 +21,30 @@ static char _stack[GNRC_GOSSIPING_STACK_SIZE + THREAD_EXTRA_STACKSIZE_PRINTF];
 static char _stack[GNRC_GOSSIPING_STACK_SIZE];
 #endif
 
+uint32_t hash_msg(msg_t msg)
+{
+    DEBUG("gossiping: first: %x\n", msg.type);
+    
+    gnrc_pktsnip_t* pkt = msg.content;
+    DEBUG("gossiping: second: %x\n", pkt.type);
+/*    switch (msg.type) {*/
+/*        case GNRC_NETAPI_MSG_TYPE_RCV:*/
+/*            break;*/
+/*        case GNRC_NETAPI_MSG_TYPE_SND:*/
+/*            break;*/
+/*        case GNRC_NETAPI_MSG_TYPE_SET:*/
+/*            break;*/
+/*        case GNRC_NETAPI_MSG_TYPE_GET:*/
+/*            break;*/
+/*        default:*/
+/*            break;*/
+/*    }*/
+    return 0;
+}
+
 void *_event_loop(void *arg)
 {
-    static msg_t _msg_q[GNRC_GOSSIPING_STACK_SIZE];
+/*    static msg_t _msg_q[GNRC_GOSSIPING_STACK_SIZE];*/
     (void) arg;
     
     DEBUG("gossiping: Debug enabled\n");
@@ -31,7 +52,7 @@ void *_event_loop(void *arg)
     msg_t msg, reply;
     reply.type = GNRC_NETAPI_MSG_TYPE_ACK;
     reply.content.value = -ENOTSUP;
-    msg_init_queue(_msg_q, GNRC_GOSSIPING_STACK_SIZE);
+/*    msg_init_queue(_msg_q, GNRC_GOSSIPING_STACK_SIZE);*/
 /*    gnrc_pktsnip_t *pkt = NULL;*/
     struct gnrc_netreg_entry me_reg = GNRC_NETREG_ENTRY_INIT_PID(
                                  GNRC_NETREG_DEMUX_CTX_ALL,
